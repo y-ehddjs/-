@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1 id="demo">삼항연산자 연습</h1>
+<script>
+function renderApp() {
+  document.getElementById("demo").innerHTML = "안녕하세요!";
+}
+
+function renderLogin() {
+  document.getElementById("demo").innerHTML = "로그인하세요";
+}
+let islogin = true;
+function changeText(){
+
+    islogin = !islogin;
+    islogin? renderApp() : renderLogin(); 
+    //islogin이 참이면 renderApp()실행
+    //거짓이면 renderlogin() 실행
+
+}
+</script>
+<button onclick ="changeText()">change</button>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        body {
+            background: #CCC;
+            padding: 20px;
+        }
+        #container {
+            width: 520px;
+            border: 1px solid black;
+            padding: 20px 40px;
+            margin: 20px auto;
+            background: white;
+        }
+        fieldset {margin-bottom: 15px;}
+        legend {font-weight: bold;}
+        ul {list-style-type: none;}
+        li {line-height: 30px;}
+        label {
+            display: inline-block;
+            width: 80px;
+        }
+        input[readonly] {
+            border: none;
+        }
+        #result {
+            width: 500px;
+            height: 150px;
+            padding: 10px;
+            background-color: blanchedalmond;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            border: 10px solid dodgerblue;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>프런트엔드 개발자 지원서</h1><br>
+        <p>HTML,CSS,Javascript에 대한 기술적 이해와 경험이 있는 분을 찾습니다.</p>
+        <br>
+        <hr><br>
+        <form name="frm">
+            <fieldset>
+                <legend>개인정보</legend>
+                <ul>
+                    <li>
+                        <label for="name">이름</label> <!-- 🔧 id도 name과 일치하도록 수정 -->
+                        <input type="text" placeholder="공백없이 입력하세요"
+                        name="name" id="name">
+                    </li>
+                    <li>
+                        <label for="phone">연락처</label>
+                        <input type="tel" id="phone" name="phone">
+                    </li>
+                    <li>
+                        <label>경력선택</label>
+                        <select name="career" onchange="salaryCalc()"> <!-- 🔧 함수명 오타 수정 -->
+                            <option value="0">신입</option>
+                            <option value="1">1년이상</option>
+                            <option value="2">3년이상</option>
+                            <option value="3">5년이상</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="salry">예상연봉</label>
+                        <input type="text" name="salry" readonly>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>지원분야</legend>
+                <ul>
+                    <li>
+                        <!-- 🔧 type="redio" → type="radio"로 수정 -->
+                        <input type="radio" name="apply" value="프론트엔드" checked> 프론트엔드
+                        <input type="radio" name="apply" value="백엔드"> 백엔드
+                        <input type="radio" name="apply" value="웹기획/디자인"> 웹기획/디자인
+                        <input type="radio" name="apply" value="DevOps"> DevOps
+                    </li>
+                </ul>
+            </fieldset>
+
+            <div>
+                <button type="button" onclick="printResult()">접수하기</button> <!-- 🔧 함수명 맞춤 -->
+                <button type="reset">취소</button>
+            </div>
+            <div id="result">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function salaryCalc() { // 🔧 함수명 수정 및 구현
+            const career = document.frm.career.value;
+            let sal = "";
+            if (career === "0") sal = "28,000,000원";
+            else if (career === "1") sal = "30,000,000원";
+            else if (career === "2") sal = "32,000,000원";
+            else if (career === "3") sal = "35,000,000원";
+            document.frm.salry.value = sal;
+        }
+
+        function printResult() { // 🔧 함수명 통일 및 구현
+            const name = document.frm.name.value;
+            const phone = document.frm.phone.value;
+            const applyField = document.frm.apply.value; // 🔧 선택된 라디오 버튼 값
+            const resultDiv = document.getElementById("result");
+
+            if (name === "") {
+                alert("이름을 입력하세요.");
+                document.frm.name.focus();
+                return;
+            }
+
+            if (phone === "") {
+                alert("연락처를 입력하세요.");
+                document.frm.phone.focus();
+                return;
+            }
+
+            let resultText = name + "님은 " + applyField + " 분야에 지원하셨습니다.";
+            resultDiv.innerText = resultText; // 🔧 결과 출력
+
+            setTimeout(() => {
+                alert("부산소프트웨어마이스터고에 지원해주셔서 감사합니다.");
+            }, 1000); // 🔧 1초 후 알림
+        }
+    </script>
+</body>
+</html>

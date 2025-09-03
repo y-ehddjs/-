@@ -1,0 +1,6 @@
+f1=open('부산소마고.txt','r')
+line1=f1.readline()
+line2=f1.readline()
+line3=f1.readline()
+print(line1)
+f1.close()

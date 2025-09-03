@@ -1,6 +1,0 @@
-txt= input()
-txt1= input()
-print(txt>txt1)
-a,b=map(int,input().split())
-print(a>b)
-print(b>a)
